@@ -1,10 +1,10 @@
 $(document).ready(function(){        
-	$('li img').on('click',function(){
+	$('div img').on('click',function(){
 		var src = $(this).attr('src');
 		var img = '<img src="' + src + '" class="img-responsive"/>';
 		
 		//start of new code new code
-		var index = $(this).parent('li').index();   
+		var index = $(this).parent('div').index();   
 		
 		var html = '';
 		html += img;                
@@ -28,7 +28,7 @@ $(document).ready(function(){
 
 $(document).on('click', 'a.controls', function(){
 	var index = $(this).attr('href');
-	var src = $('ul.row li:nth-child('+ index +') img').attr('src');             
+	var src = $('div.row div:nth-child('+ index +') img').attr('src');             
 	
 	$('.modal-body img').attr('src', src);
 	
@@ -43,7 +43,7 @@ $(document).on('click', 'a.controls', function(){
 		$('a.previous').attr('href', newPrevIndex);
 	}
 	
-	var total = $('ul.row li').length + 1; 
+	var total = $('div.row div').length + 1; 
 	//hide next button
 	if(total === newNextIndex){
 		$('a.next').hide();
