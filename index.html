@@ -1,97 +1,119 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/3.3.7.bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/jquery-1.11.2.min.js"></script>
-    <script src="js/3.3.7bootstrap.min.js"></script>
-    <script src="js/scripts.js"></script>
-    <title>FrontEnd - Fotos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="css/3.3.7.bootstrap.min.css">
+        <link rel="stylesheet" href="css/estilo.css">
+        <script src="js/jquery-1.11.2.min.js"></script>
+        <script src="js/3.3.7bootstrap.min.js"></script>
+        <script src="js/scripts.js"></script>
+        <title>FrontEnd - Fotos</title>
 </head>
+
 <body>
-    <header class="navbar navbar-default">
-        <div class = "container-fluid">
-            <div class="navbar-header"> 
-                <a href="#">Home</a>
-                <a href="#">Link 01</a>
-                <a href="#">Link 02</a>
-            </div>
+    <header>
 
-            <form class="navbar-form navbar-right">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
-
-        </div>
+            <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                      <div class="navbar-header">
+                        <a class="navbar-brand" href="#">WebSiteName</a>
+                      </div>
+                      <ul class="nav navbar-nav">
+                        <li><a data-toggle="collapse" data-parent="#paginas" href="#index">Home</a></li>
+                        <li><a data-toggle="collapse" data-parent="#paginas" href="#sobre-nos">Sobre Nós</a></li>
+                        <li><a data-toggle="collapse" data-parent="#paginas" href="#albuns">Albuns</a></li>
+                      </ul>
+                      <form class="navbar-form navbar-left" action="/action_page.php">
+                        <div class="form-group">
+                          <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">Submit</button>
+                      </form>
+                    </div>
+                  </nav>
     </header>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-3">
-                <ul class="nav nav-pills nav-stacked">
-                    <li><a href="#">Album 01</a></li>
+<div class="container-fluid">
+
+    <div class="row">
+        
+        <!-- menu -->
+        <div class="col-md-3">
+            <ul class="nav nav-pills nav-stacked">
+                    <li><a data-toggle="collapse" data-parent="#paginas" href="#album1">Album 01</a></li>
                     <li><a href="#">Album 02</a></li>
                     <li><a href="#">Album 03</a></li>
                     <li><a href="#">Album 04</a></li>
-                </ul>
-            </div>
-            <div class="col-md-9">
-                <div class="row">
-                    <div class="col-lg-3 col-md-12 col-sm-2 col-xs-12">
-                        <img class="img-responsive img-thumbnail profile-pic-h" src="imagens/01/1.jpg">
-                    </div>
-                    <div class="col-lg-3 col-md-12 col-sm-2 col-xs-12">
-                        <img class="img-responsive img-thumbnail profile-pic-h" src="imagens/01/2.jpg">
-                    </div>
-                    <div class="col-lg-3 col-md-12 col-sm-2 col-xs-12">
-                        <img class="img-responsive img-thumbnail profile-pic-h" src="imagens/01/3.jpg">
-                    </div>
-                    <div class="col-lg-3 col-md-12 col-sm-2 col-xs-12">
-                        <img class="img-responsive img-thumbnail profile-pic-v" src="imagens/01/4.jpg">
-                    </div>
-                    <div class="col-lg-3 col-md-12 col-sm-2 col-xs-12">
-                        <img class="img-responsive img-thumbnail profile-pic-v" src="imagens/01/5.jpg">
-                    </div>
-                    <div class="col-lg-3 col-md-12 col-sm-2 col-xs-12">
-                        <img class="img-responsive img-thumbnail profile-pic-v" src="imagens/01/6.jpg">
-                    </div>
-                    <div class="col-lg-3 col-md-12 col-sm-2 col-xs-12">
-                        <img class="img-responsive img-thumbnail profile-pic-v" src="imagens/01/7.jpg">
-                    </div>
-                    <div class="col-lg-3 col-md-12 col-sm-2 col-xs-12">
-                        <img class="img-responsive img-thumbnail profile-pic-h" src="imagens/01/8.jpg">
-                    </div>
-                    <div class="col-lg-3 col-md-12 col-sm-2 col-xs-12">
-                        <img class="img-responsive img-thumbnail profile-pic-h" src="imagens/01/9.jpg">
+            </ul>
+        </div>
+
+
+        <div class="col-md-9">
+            <div class="panel-group" id="paginas">
+                <div class="panel panel-default">
+                    <div id="index" class="panel collapse in">
+                        <h1>Album de fotos Aula Front End</h1>
+                        <p>Praticando FrontEnd</p>
                     </div>
                 </div>
+
+                <div class="panel panel-default">
+                    <div id="sobre-nos" class="panel collapse">
+                        <h2>Sobre Nós</h2>
+                        <h3 class="panel-title">Somos Fabíola e Kyrla e estamos desenvolvendo um projeto para praticar algumas técnicas de CSS e Jquery. Nesse projeto iremos desenvolver uma aplicação de album de fotos.</h3>
+                    </div>
+                </div>
+                
+                <div class="panel panel-default">
+                    <div id="albuns" class="panel collapse">
+                        <h2>Albuns</h2>
+                        <h3 class="panel-title">Selecione um dos albuns para visualizar as fotos.</h3>
+                    </div>
+                </div>
+                
+
+        <div class="panel panel-default">
+                <div id="album1" class="panel collapse">
+                    <div class="row">
+                            <div class="col-lg-3 col-md-12 col-sm-2 col-xs-12">
+                                    <img class="img-responsive img-thumbnail profile-pic-h" src="imagens/01/1.jpg">
+                                </div>
+                                <div class="col-lg-3 col-md-12 col-sm-2 col-xs-12">
+                                    <img class="img-responsive img-thumbnail profile-pic-h" src="imagens/01/2.jpg">
+                                </div>
+                                <div class="col-lg-3 col-md-12 col-sm-2 col-xs-12">
+                                    <img class="img-responsive img-thumbnail profile-pic-h" src="imagens/01/3.jpg">
+                                </div>
+                                <div class="col-lg-3 col-md-12 col-sm-2 col-xs-12">
+                                    <img class="img-responsive img-thumbnail profile-pic-v" src="imagens/01/4.jpg">
+                                </div>
+                                <div class="col-lg-3 col-md-12 col-sm-2 col-xs-12">
+                                    <img class="img-responsive img-thumbnail profile-pic-v" src="imagens/01/5.jpg">
+                                </div>
+                                <div class="col-lg-3 col-md-12 col-sm-2 col-xs-12">
+                                    <img class="img-responsive img-thumbnail profile-pic-v" src="imagens/01/6.jpg">
+                                </div>
+                                <div class="col-lg-3 col-md-12 col-sm-2 col-xs-12">
+                                    <img class="img-responsive img-thumbnail profile-pic-v" src="imagens/01/7.jpg">
+                                </div>
+                                <div class="col-lg-3 col-md-12 col-sm-2 col-xs-12">
+                                    <img class="img-responsive img-thumbnail profile-pic-h" src="imagens/01/8.jpg">
+                                </div>
+                                <div class="col-lg-3 col-md-12 col-sm-2 col-xs-12">
+                                    <img class="img-responsive img-thumbnail profile-pic-h" src="imagens/01/9.jpg">
+                                </div>
+                            </div>
+                </div>
+            </div>
+
+
+                
             </div>
         </div>
     </div>
+</div>
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">         
-                <div class="modal-body">               
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-              
-
-
-
-
-    <footer class="bs-docs-footer">
-        <div class="container-fluid footer">
-                <p>Front End</p>
-        </div>
-    </footer>
-
-</body>
+</body>    
 </html>
