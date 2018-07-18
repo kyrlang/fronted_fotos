@@ -1,7 +1,7 @@
 var $auth = (function () {
 
-    let clientId = '';
-    let secret = '';
+    let clientId = '570343088582-b234m51187qrals2m7p3fddp5eoumlr8.apps.googleusercontent.com';
+    let secret = '4U_SO13Sj9AgJyVBKaQsWv5c';
     let response_type = 'code';
     let scope = 'https://www.googleapis.com/auth/photoslibrary';
     let access_type = 'offline';
@@ -13,9 +13,13 @@ var $auth = (function () {
     var code_auth = '';
     var refresh_token = '';
 
-    
-    if (window.document.URL.indexOf("code") != -1) {
+    debugger;
+    if (localStorage.getItem("access_token") != null) {
+        listAlbuns(localStorage.getItem("access_token"));
+    }
+    else if (window.document.URL.indexOf("code") != -1) {
         code_auth = getUrlVars()['code'];
+        localStorage.setItem("code", code_auth)
         validateToken(code_auth);
         window.location = returnUri;
     }
@@ -66,7 +70,7 @@ var $auth = (function () {
     }
 
     function validateToken(code) {
-
+        
         $.ajax({
             url: "https://www.googleapis.com/oauth2/v3/token",
             data: {
@@ -92,6 +96,33 @@ var $auth = (function () {
 
     }
 
+
+    function listAlbuns(token) {
+        debugger;
+        $.ajax({
+            url: "https://photoslibrary.googleapis.com/v1/albums",
+            dataType: 'json',
+            data: {
+                pageSize: 5,
+                access_token: token
+            },
+            method: "GET",
+            success: function (e) {
+                console.log("Response: " + e);
+                var strMenu = '';
+                $.each(e.albums, (i, item) => {
+                    //strMenu += '<li><a data-toggle="collapse" data-parent="#paginas" href="' + item.productUrl + '">' + item.title + '</a ></li > ';
+                    strMenu += '<li><a data-toggle="collapse" data-parent="#paginas" href="#" onclick="javascript:exibir(\'' + item.id + '\')">' + item.title + '</a ></li > ';
+                });
+                $('#menuVertical').html(strMenu);
+            }
+        }).fail(function (err) {
+            console.log("error" + err);
+        });;
+
+    }
+
+
     function gup(url, name) {
         name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
         var regexS = "[\\#&]" + name + "=([^&#]*)";
@@ -116,6 +147,10 @@ var $auth = (function () {
             },
             dataType: "jsonp"
         });
+    }
+
+    function exibir(id) {
+        alert(id);
     }
 
 })();
