@@ -18,6 +18,7 @@ var $auth = (function () {
         listAlbuns(localStorage.getItem("access_token"));
     }
     else if (window.document.URL.indexOf("code") != -1) {
+        localStorage.removeItem("access_token")
         code_auth = getUrlVars()['code'];
         localStorage.setItem("code", code_auth)
         validateToken(code_auth);
@@ -149,8 +150,33 @@ var $auth = (function () {
         });
     }
 
-    function exibir(id) {
-        alert(id);
-    }
+
 
 })();
+
+function exibir(id) {
+    debugger;
+    $.ajax({
+        url: "https://photoslibrary.googleapis.com/v1/mediaItems:search",
+        dataType: 'json',
+        data: {
+            albumId: id
+        },
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem("access_token"),
+            'Access-Control-Allow-Origin': '*'
+        },
+        method: "GET",
+        success: function (e) {
+            console.log("Response: " + e);
+            var strMenu = '';
+            $.each(e.albums, (i, item) => {
+                //strMenu += '<li><a data-toggle="collapse" data-parent="#paginas" href="' + item.productUrl + '">' + item.title + '</a ></li > ';
+              //  strMenu += '<li><a data-toggle="collapse" data-parent="#paginas" href="#" onclick="javascript:exibir(\'' + item.id + '\')">' + item.title + '</a ></li > ';
+            });
+            //$('#menuVertical').html(strMenu);
+        }
+    }).fail(function (err) {
+        console.log("error" + err);
+    });
+}
