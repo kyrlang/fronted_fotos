@@ -1,9 +1,9 @@
 var $auth = (function () {
 
-    let clientId = '570343088582-b234m51187qrals2m7p3fddp5eoumlr8.apps.googleusercontent.com';
-    let secret = '4U_SO13Sj9AgJyVBKaQsWv5c';
+    let clientId = '570343088582-fv94ns2tgse3sg08cs8tip7uuf5gjq47.apps.googleusercontent.com';
+    let secret = 'sWgD2cbpRDFyMBg37ITz_W7w';
     let response_type = 'code';
-    let scope = 'https://www.googleapis.com/auth/photoslibrary';
+    let scope = 'https://www.googleapis.com/auth/photoslibrary.readonly';
     let access_type = 'offline';
     let returnUri = 'https://localhost:44394';
     let oauthurl = 'https://accounts.google.com/o/oauth2/v2/auth?client_id=';
@@ -35,15 +35,6 @@ var $auth = (function () {
                     code_auth = code;
                     window.clearInterval(pollTimer);
                     var url = window.document.URL;
-                    //validateToken(code);
-                    //acToken = gup(url, 'access_token');
-                    //tokenType = gup(url, 'token_type');
-                    //expiresIn = gup(url, 'expires_in');
-                    //localStorage.setItem("access_token", access_token);
-                    //localStorage.setItem("token_type", tokenType);
-                    //localStorage.setItem("expires_in", expiresIn);
-                    //win.close();
-                    //validateToken(acToken);
                 }
             } catch (e) {
                 console.log(e.message);
@@ -158,25 +149,22 @@ function exibir(id) {
     debugger;
     $.ajax({
         url: "https://photoslibrary.googleapis.com/v1/mediaItems:search",
-        dataType: 'json',
-        data: {
-            albumId: id
-        },
+        dataType: 'jsonp',
+        contentType: "application/json",
+        data: JSON.stringify({ "albumId": id }),
         headers: {
-            Authorization: 'Bearer ' + localStorage.getItem("access_token"),
-            'Access-Control-Allow-Origin': '*'
+            "Authorization": "Bearer " + localStorage.getItem("access_token"),
+            "Access-Control-Allow-Origin": '*'
         },
-        method: "GET",
+        method: "POST",
         success: function (e) {
-            console.log("Response: " + e);
+            debugger;
             var strMenu = '';
             $.each(e.albums, (i, item) => {
-                //strMenu += '<li><a data-toggle="collapse" data-parent="#paginas" href="' + item.productUrl + '">' + item.title + '</a ></li > ';
-              //  strMenu += '<li><a data-toggle="collapse" data-parent="#paginas" href="#" onclick="javascript:exibir(\'' + item.id + '\')">' + item.title + '</a ></li > ';
             });
-            //$('#menuVertical').html(strMenu);
+        },
+        error: function (e) {
+            debugger;
         }
-    }).fail(function (err) {
-        console.log("error" + err);
     });
 }
