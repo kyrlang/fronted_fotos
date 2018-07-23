@@ -3,7 +3,7 @@ var $auth = (function () {
     let clientId = '570343088582-fv94ns2tgse3sg08cs8tip7uuf5gjq47.apps.googleusercontent.com';
     let secret = 'sWgD2cbpRDFyMBg37ITz_W7w';
     let response_type = 'code';
-    let scope = 'https://www.googleapis.com/auth/photoslibrary.readonly';
+    let scope = 'https://www.googleapis.com/auth/photoslibrary';
     let access_type = 'offline';
     let returnUri = 'https://localhost:44394';
     let oauthurl = 'https://accounts.google.com/o/oauth2/v2/auth?client_id=';
@@ -93,7 +93,7 @@ var $auth = (function () {
         debugger;
         $.ajax({
             url: "https://photoslibrary.googleapis.com/v1/albums",
-            dataType: 'json',
+            dataType: 'jsonp',
             data: {
                 pageSize: 5,
                 access_token: token
