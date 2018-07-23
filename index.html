@@ -21,11 +21,13 @@
                         <li><a data-toggle="collapse" data-parent="#paginas" href="#sobre-nos">Sobre Nós</a></li>
                         <li><a data-toggle="collapse" data-parent="#paginas" href="#listaTodasFotos" onclick="javascript:listarFotos()">Fotos</a></li>
                       </ul>
-                      <form class="navbar-form navbar-left" action="/action_page.php">
+                      <form class="navbar-form navbar-left" >
                         <div class="form-group">
-                          <input type="text" class="form-control" placeholder="Search">
+                          <input type="text" class="form-control" placeholder="Search Album" id="txtAlbum">
                         </div>
-                        <button type="submit" class="btn btn-default">Submit</button>
+                        <a data-toggle="collapse" data-parent="#paginas" href="#listaBuscaAlbum" >
+                            <button type="button" class="btn btn-default" onclick="buscarAlbum()">Search</button>
+                        </a>
                       </form>
                     </div>
                   </nav>
@@ -61,7 +63,7 @@
                         <h3 class="panel-title">Somos Fabíola e Kyrla e estamos desenvolvendo um projeto para praticar algumas técnicas de CSS e Jquery. Nesse projeto iremos desenvolver uma aplicação de album de fotos.</h3>
                     </div>
                 </div>
-                
+
                 <div class="panel panel-default">
                     <div id="listaTodasFotos" class="panel collapse">
                         <div class="row" id="listaFotos">
@@ -81,6 +83,14 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="panel panel-default">
+                    <div id="listaBuscaAlbum" class="panel collapse">
+                            <ul class="nav nav-pills nav-stacked" id="listaAlbum">
+                            </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

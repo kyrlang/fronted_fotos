@@ -5,7 +5,7 @@ var VALIDURL = 'https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=';
 var SCOPE =   'https://www.googleapis.com/auth/photoslibrary.readonly profile';
 var CLIENTID = '570343088582-fv94ns2tgse3sg08cs8tip7uuf5gjq47.apps.googleusercontent.com';
 var SECRET = 'sWgD2cbpRDFyMBg37ITz_W7w';
-var REDIRECT = 'http://localhost:51197'
+var REDIRECT = 'http://localhost:6670'
 var LOGOUT = 'http://accounts.google.com/Logout';
 var TYPE = 'code';
 var _url = OAUTHURL + 'scope=' + SCOPE + '&client_id=' + CLIENTID + '&redirect_uri=' + REDIRECT + '&response_type=' + TYPE;
@@ -102,7 +102,6 @@ function getUserInfo(token) {
         dataType: "jsonp"
     });
 }
-
 
 function getUrlVars(url) {
     var vars = [], hash;
@@ -268,7 +267,43 @@ function criaralbum() {
 
 }
 
+function buscarAlbum() {
+    $.ajax({
+        url: "https://photoslibrary.googleapis.com/v1/albums",
+        dataType: 'jsonp',
+        headers: {
+            "Access-Control-Allow-Origin": '*'
+        },
+        data: {
+            pageSize: 20,
+            access_token: acToken
+        },
+        method: "GET",
+        success: function (e) {
+            var strMenu = ''
+            if (e.albums != undefined) {
+                $.each(e.albums, (i, item) => {
+                    if (item.title.indexOf($(txtAlbum).val()) != -1) {
+                        strMenu += '<li><a data-toggle="collapse"  data-parent="#paginas" href="#album1"  onclick="javascript:exibir(\'' + item.id + '\'' + '\,\'' + item.title + '\'' + '\,\'' + acToken + '\')">' + item.title + '</a ></li > ';
+                    }
+                });
+            }
 
+            if (strMenu == '') {
+                strMenu  = 'Nenhum album encontrado :(';
+            }
+            else {
+                strMenu = '<h2>Clique em um dos albuns listados para visualizar as imagens</h2>' + strMenu;
+            }
+
+            $('#listaAlbum').html(strMenu);
+            
+        }
+    }).fail(function (err) {
+        console.log("error" + err);
+    });
+
+}
 
 
 
