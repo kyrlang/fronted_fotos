@@ -5,8 +5,8 @@ var VALIDURL = 'https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=';
 var SCOPE =   'https://www.googleapis.com/auth/photoslibrary.readonly profile';
 var CLIENTID = '570343088582-fv94ns2tgse3sg08cs8tip7uuf5gjq47.apps.googleusercontent.com';
 var SECRET = 'sWgD2cbpRDFyMBg37ITz_W7w';
-//var REDIRECT = 'http://localhost:6670'
-var REDIRECT = 'https://fotos-dd9d6.firebaseapp.com/'
+var REDIRECT = 'http://localhost:6670'
+//var REDIRECT = 'https://fotos-dd9d6.firebaseapp.com/'
 var LOGOUT = 'http://accounts.google.com/Logout';
 var TYPE = 'code';
 var _url = OAUTHURL + 'scope=' + SCOPE + '&client_id=' + CLIENTID + '&redirect_uri=' + REDIRECT + '&response_type=' + TYPE;
@@ -305,6 +305,71 @@ function buscarAlbum() {
     });
 
 }
+
+function upload() {
+
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://photoslibrary.googleapis.com/v1/uploads",
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Authorization": "Bearer ya29.GlwCBmo9WMOvCNQlDO331HQOCvjcV6ujjtrDg0iNjHChp1W5JSmWpWdzWB0sQcRRcnX_5NaBzEVFBfFONC4Maa8dtRK-ybred12XKI4L8fsGEmbSLRcxaU5GamwvVA",
+            "Cache-Control": "no-cache",
+            "Postman-Token": "52f78b26-4e42-46c0-b839-8587ba488aae"
+        }
+    }
+
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
+
+}
+
+$(function () {
+
+    var form;
+    $('#fileUpload').change(function (event) {
+        form = new FormData();
+        form.append('fileUpload', event.target.files[0]); // para apenas 1 arquivo
+        //var name = event.target.files[0].content.name; // para capturar o nome do arquivo com sua extenção
+    });
+
+    $('#btnEnviar').click(function () {
+
+        var uploadFormData = new FormData();
+        uploadFormData.append("data", new Blob([form], { type: "application/octet-stream" }));
+
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://photoslibrary.googleapis.com/v1/uploads",
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/octet-stream",
+                "Authorization": "Bearer " + acToken,
+            },
+            "data": uploadFormData 
+        }
+
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        });
+
+
+        //$.ajax({
+        //    url: 'URL SERVER', // Url do lado server que vai receber o arquivo
+        //    data: form,
+        //    processData: false,
+        //    contentType: false,
+        //    type: 'POST',
+        //    success: function (data) {
+        //        // utilizar o retorno
+        //    }
+        //});
+    });
+});
 
 
 
