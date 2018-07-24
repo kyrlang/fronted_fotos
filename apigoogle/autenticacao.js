@@ -5,8 +5,8 @@ var VALIDURL = 'https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=';
 var SCOPE =   'https://www.googleapis.com/auth/photoslibrary.readonly profile';
 var CLIENTID = '570343088582-fv94ns2tgse3sg08cs8tip7uuf5gjq47.apps.googleusercontent.com';
 var SECRET = 'sWgD2cbpRDFyMBg37ITz_W7w';
-//var REDIRECT = 'http://localhost:6670'
-var REDIRECT = 'https://fotos-dd9d6.firebaseapp.com/'
+var REDIRECT = 'http://localhost:51197'
+//var REDIRECT = 'https://fotos-dd9d6.firebaseapp.com/'
 var LOGOUT = 'http://accounts.google.com/Logout';
 var TYPE = 'code';
 var _url = OAUTHURL + 'scope=' + SCOPE + '&client_id=' + CLIENTID + '&redirect_uri=' + REDIRECT + '&response_type=' + TYPE;
