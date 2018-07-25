@@ -66,14 +66,21 @@
 
                 <div class="panel panel-default">
                     <div id="listaTodasFotos" class="panel collapse">
-                        <div class="row" id="listaFotos">
-                        </div>
                         <form class="navbar-form navbar-left" action="#">
+
+                            <div>
+                                <h2 id="tituloFotos"></h2>
+                            </div>
+
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Informe o nome do Album" id="inputNomeAlbum">
                             </div>
                             <button type="button" class="btn btn-default" onclick="javascript:criaralbum()">Criar</button>
                         </form>
+
+                        <div class="row" id="listaFotos">
+                        </div>
+
                     </div>
                 </div>
 
@@ -86,8 +93,19 @@
 
                 <div class="panel panel-default">
                     <div id="listaBuscaAlbum" class="panel collapse">
-                            <ul class="nav nav-pills nav-stacked" id="listaAlbum">
-                            </ul>
+                        <ul class="nav nav-pills nav-stacked" id="listaAlbum"></ul>
+                        <form class="navbar-form navbar-left" action="#">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Informe o nome do Album" id="inputNomeAlbum">
+                            </div>
+                            <!--<button type="button" class="btn btn-default" onclick="javascript:criaralbum()">Criar</button>-->
+                        </form>
+                        <form class="navbar-form navbar-left" action="#">
+                            <div class="form-group">
+                                <input type="file" id="fileUpload" name="fileUpload" class="form-control" placeholder="Search" />
+                            </div>
+                            <button type="button" id="btnEnviar" class="btn btn-default" value="Enviar">Enviar</button>
+                        </form>
                     </div>
                 </div>
 

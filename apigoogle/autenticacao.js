@@ -1,8 +1,8 @@
 var OAUTHURL = 'https://accounts.google.com/o/oauth2/auth?';
                 https://www.googleapis.com/oauth2/v3/token
 var VALIDURL = 'https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=';
-//var SCOPE = 'https://www.googleapis.com/auth/drive.photos.readonly https://www.googleapis.com/auth/photoslibrary https://www.googleapis.com/auth/photoslibrary.readonly https://www.googleapis.com/auth/photoslibrary.readonly.appcreateddata https://www.googleapis.com/auth/userinfo.profile';
-var SCOPE =   'https://www.googleapis.com/auth/photoslibrary.readonly profile';
+//var SCOPE = 'https://www.googleapis.com/auth/drive.photos.readonly https://www.googleapis.com/auth/photoslibrary https://www.googleapis.com/auth/photoslibrary.readonly https://www.googleapis.com/auth/photoslibrary.readonly.appcreateddata https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/photoslibrary.appendonly https://www.googleapis.com/auth/photoslibrary.sharing';
+var SCOPE =   'https://www.googleapis.com/auth/photoslibrary.readonly https://www.googleapis.com/auth/photoslibrary.appendonly https://www.googleapis.com/auth/photoslibrary.sharing profile';
 var CLIENTID = '570343088582-fv94ns2tgse3sg08cs8tip7uuf5gjq47.apps.googleusercontent.com';
 var SECRET = 'sWgD2cbpRDFyMBg37ITz_W7w';
 var REDIRECT = 'http://localhost:51197'
@@ -140,6 +140,11 @@ function menu(token) {
             $.each(e.albums, (i, item) => {
                 strMenu += '<li><a data-toggle="collapse"  data-parent="#paginas" href="#album1"  onclick="javascript:exibir(\'' + item.id + '\'' + '\,\'' + item.title + '\'' + '\,\'' + token + '\')">' + item.title + '</a ></li > ';
             });
+
+            if (strMenu == '') {
+                strMenu = "Você ainda não tem nenhum album no Google Photos"
+            }
+
             $('#menuVertical').html(strMenu);
         }
     }).fail(function (err) {
@@ -256,15 +261,58 @@ function criaralbum() {
     var imagensSeleciondas = new Array();
     var nomeAlbum = $(inputNomeAlbum).val();
 
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://photoslibrary.googleapis.com/v1/albums",
+        "method": "POST",
+        "dataType": 'json',
+        "headers": {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + acToken,
+            "Cache-Control": "no-cache"
+        },
+        "processData": false,
+        "data": '{"album": {"title":"' + nomeAlbum + '"}}'
+    }
 
-    $(".image-checkbox").each(function () {
-
-        var $checkbox = $(this).find('input[type="checkbox"]');
-        if ($checkbox.prop("checked") == true) {
-            imagensSeleciondas.push($checkbox.val());
-            alert("criaralbum");
-        }
+    $.ajax(settings).done(function (response) {
+        menu(acToken);
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+        alert("Error");
     });
+
+
+    //$(".image-checkbox").each(function () {
+
+    //    var $checkbox = $(this).find('input[type="checkbox"]');
+    //    if ($checkbox.prop("checked") == true) {
+    //        imagensSeleciondas.push($checkbox.val());
+    //    }
+    //});
+
+    //var settings = {
+    //    "async": true,
+    //    "crossDomain": true,
+    //    "url": "https://photoslibrary.googleapis.com/v1/mediaItems/" + imagensSeleciondas[0],
+    //    "method": "GET",
+    //    "dataType": 'json',
+    //    "headers": {
+    //        "Content-Type": "application/json",
+    //        "Authorization": "Bearer " + acToken,
+    //        "Cache-Control": "no-cache"
+    //    },
+    //    "processData": false,
+    //}
+
+    //$.ajax(settings).done(function (response) {
+    //    console.log(response);
+    //}).fail(function (jqXHR, textStatus, errorThrown) {
+    //    alert("Error");
+    //});
+
+
+
 
 }
 
@@ -294,7 +342,7 @@ function buscarAlbum() {
                 strMenu  = 'Nenhum album encontrado :(';
             }
             else {
-                strMenu = '<h2>Clique em um dos albuns listados para visualizar as imagens</h2>' + strMenu;
+                $('#tituloFotos').html('<h2>Clique em um dos albuns listados para visualizar as imagens</h2>');
             }
 
             $('#listaAlbum').html(strMenu);
@@ -306,130 +354,60 @@ function buscarAlbum() {
 
 }
 
+function upload() {
 
+    var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://photoslibrary.googleapis.com/v1/uploads",
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Authorization": "Bearer ya29.GlwCBmo9WMOvCNQlDO331HQOCvjcV6ujjtrDg0iNjHChp1W5JSmWpWdzWB0sQcRRcnX_5NaBzEVFBfFONC4Maa8dtRK-ybred12XKI4L8fsGEmbSLRcxaU5GamwvVA",
+            "Cache-Control": "no-cache",
+            "Postman-Token": "52f78b26-4e42-46c0-b839-8587ba488aae"
+        }
+    }
 
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+    });
 
+}
 
-//var $auth = (function () {
+$(function () {
 
-//    let clientId = '570343088582-fv94ns2tgse3sg08cs8tip7uuf5gjq47.apps.googleusercontent.com';
-//    let secret = 'sWgD2cbpRDFyMBg37ITz_W7w';
-//    let response_type = 'code';
-//    let scope = 'https://www.googleapis.com/auth/photoslibrary';
-//    let access_type = 'offline';
-//    let returnUri = 'https://localhost:44394';
-//    let oauthurl = 'https://accounts.google.com/o/oauth2/v2/auth?client_id=';
-//    let validurl = 'https://www.googleapis.com/oauth2/v2/tokeninfo?access_token=';
-//    let url = oauthurl + clientId + '&response_type=code&scope=' + scope + '&redirect_uri=' + returnUri + '&access_type=offline';
-//    var access_token = '';
-//    var code_auth = '';
-//    var refresh_token = '';
+    var form;
+    $('#fileUpload').change(function (event) {
+        form = new FormData();
+        form.append('fileUpload', event.target.files[0]); // para apenas 1 arquivo
+        //var name = event.target.files[0].content.name; // para capturar o nome do arquivo com sua extenção
+    });
 
-    
-//    if (window.document.URL.indexOf("code") != -1) {
-//        code_auth = getUrlVars()['code'];
-//       // validateToken(code_auth);
-//        //window.location = returnUri;
-//    //}
-//    //else if (localStorage.getItem("access_token") == null) {
+    $('#btnEnviar').click(function () {
 
-//        window.location = oauthurl + clientId + '&response_type=code&scope=' + scope + '&redirect_uri=' + returnUri + '&access_type=offline';
+        var settings = {
+            "async": true,
+            "crossDomain": true,
+            "url": "https://photoslibrary.googleapis.com/v1/uploads",
+            "method": "POST",
+            "headers": {
+                "Authorization": "Bearer " + acToken,
+                "Content-type": ": application/octet-stream",
+                "X-Goog-Upload-File-Name": "teste",
+                "Cache-Control": "no-cache",
+                "Access-Control-Allow-Origin": '*'
+            },
+            "processData": false,
+            "contentType": false,
+            "mimeType": "multipart/form-data",
+            "data": form
+        }
 
-//        var pollTimer = window.setInterval(function () {
-//            try {
-//                if (window.document.URL.indexOf(returnUri) != -1) {
-//                    code = geturlvars()['code'];
-//                    code_auth = code;
-//                    window.clearInterval(pollTimer);
-//                    var url = window.document.URL;
-//                    //validateToken(code);
-//                    //acToken = gup(url, 'access_token');
-//                    //tokenType = gup(url, 'token_type');
-//                    //expiresIn = gup(url, 'expires_in');
-//                    //localStorage.setItem("access_token", access_token);
-//                    //localStorage.setItem("token_type", tokenType);
-//                    //localStorage.setItem("expires_in", expiresIn);
-//                    //win.close();
-//                    //validateToken(acToken);
-//                }
-//            } catch (e) {
-//                console.log(e.message);
-//            }
-//        }, 500);
-
-//    }
-
-//    function getUrlVars() {
-//        var vars = [], hash;
-//        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-//        for (var i = 0; i < hashes.length; i++) {
-//            hash = hashes[i].split('=');
-
-//            if ($.inArray(hash[0], vars) > -1) {
-//                vars[hash[0]] += "," + hash[1];
-//            }
-//            else {
-//                vars.push(hash[0]);
-//                vars[hash[0]] = hash[1];
-//            }
-//        }
-
-//        return vars;
-//    }
-
-//    function validateToken(code) {
-
-//        $.ajax({
-//            url: "https://www.googleapis.com/oauth2/v3/token",
-//            data: {
-//                code: code,
-//                client_id: clientId,
-//                client_secret: secret,
-//                redirect_uri: returnUri,
-//                grant_type: "authorization_code"
-//            },
-//            method: "POST",
-//            success: function (e) {
-//                console.log("Response: " + e);
-//                console.log("AT: " + e['access_token']);
-//                console.log("RT: " + e['refresh_token']);
-//                access_token = e['access_token'];
-//                refresh_token = e['refresh_token'];
-//                localStorage.setItem("access_token", access_token)
-//            }
-//        }).fail(function (err) {
-//            alert("error" + err); //[Object object]
-//            console.log("error" + err);
-//        });;
-
-//    }
-
-//    function gup(url, name) {
-//        name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
-//        var regexS = "[\\#&]" + name + "=([^&#]*)";
-//        var regex = new RegExp(regexS);
-//        var results = regex.exec(url);
-//        if (results == null)
-//            return "";
-//        else
-//            return results[1];
-//    }
-
-//    function getUserInfo() {
-//        alert("C");
-//        $.ajax({
-//            url: 'https://www.googleapis.com/oauth2/v1/userinfo?access_token=' + acToken,
-//            data: null,
-//            success: function (resp) {
-//                user = resp;
-//                console.log(user);
-//                //$('#uName').text('Welcome ' + user.name);
-//                //$('#imgHolder').attr('src', user.picture);
-//            },
-//            dataType: "jsonp"
-//        });
-//    }
-
-//})();
-
-
+        $.ajax(settings).done(function (response) {
+            console.log(response);
+        }).fail(function (err) {
+            alert("Ocorreu um erro ao realizar o upload.");
+        });
+    });
+});
