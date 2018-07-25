@@ -5,7 +5,7 @@ var VALIDURL = 'https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=';
 var SCOPE =   'https://www.googleapis.com/auth/photoslibrary.readonly https://www.googleapis.com/auth/photoslibrary.appendonly https://www.googleapis.com/auth/photoslibrary.sharing profile';
 var CLIENTID = '570343088582-fv94ns2tgse3sg08cs8tip7uuf5gjq47.apps.googleusercontent.com';
 var SECRET = 'sWgD2cbpRDFyMBg37ITz_W7w';
-var REDIRECT = 'http://localhost:51197'
+var REDIRECT = 'http://localhost:6670'
 //var REDIRECT = 'https://fotos-dd9d6.firebaseapp.com/'
 var LOGOUT = 'http://accounts.google.com/Logout';
 var TYPE = 'code';
@@ -17,31 +17,37 @@ var expiresIn;
 var user;
 var loggedIn = false;
 
-if (window.document.URL.indexOf("code") != -1) {
-    code_auth = getUrlVars();
-    getToken(code_auth);
-    //window.location = REDIRECT;
- //   menu(acToken);
+if (loggedIn == false) {
+
+    $('#mensagemLogin').html("Usuário não autenticado");
+
 }
-else if (window.document.URL.indexOf("code") == -1) {
 
-    var win = window.open(_url, "windowname1", 'width=800, height=600');
-    //window.location = _url;
-    var pollTimer = window.setInterval(function () {
-        try {
-            console.log(win.document.URL);
-            if (win.document.URL.indexOf(REDIRECT) != -1) {
 
-                window.clearInterval(pollTimer);
-                var url = win.document.URL;
-                win.close();
-                code_auth = getUrlVars(url);
-                getToken(code_auth);
+function login() {
+    if (window.document.URL.indexOf("code") != -1) {
+        code_auth = getUrlVars();
+        getToken(code_auth);
+    }
+    else if (window.document.URL.indexOf("code") == -1) {
+
+        var win = window.open(_url, "windowname1", 'width=800, height=600');
+        var pollTimer = window.setInterval(function () {
+            try {
+                console.log(win.document.URL);
+                if (win.document.URL.indexOf(REDIRECT) != -1) {
+
+                    window.clearInterval(pollTimer);
+                    var url = win.document.URL;
+                    win.close();
+                    code_auth = getUrlVars(url);
+                    getToken(code_auth);
+                }
+            } catch (e) {
             }
-        } catch (e) {
-        }
-    }, 500);
+        }, 500);
 
+    }
 }
 
 function gup(url, name) {
@@ -255,11 +261,11 @@ function listarFotos() {
 
 }
 
-function criaralbum() {
+function criaralbum(album) {
     debugger;
 
     var imagensSeleciondas = new Array();
-    var nomeAlbum = $(inputNomeAlbum).val();
+    var nomeAlbum = album;
 
     var settings = {
         "async": true,
@@ -281,38 +287,6 @@ function criaralbum() {
     }).fail(function (jqXHR, textStatus, errorThrown) {
         alert("Error");
     });
-
-
-    //$(".image-checkbox").each(function () {
-
-    //    var $checkbox = $(this).find('input[type="checkbox"]');
-    //    if ($checkbox.prop("checked") == true) {
-    //        imagensSeleciondas.push($checkbox.val());
-    //    }
-    //});
-
-    //var settings = {
-    //    "async": true,
-    //    "crossDomain": true,
-    //    "url": "https://photoslibrary.googleapis.com/v1/mediaItems/" + imagensSeleciondas[0],
-    //    "method": "GET",
-    //    "dataType": 'json',
-    //    "headers": {
-    //        "Content-Type": "application/json",
-    //        "Authorization": "Bearer " + acToken,
-    //        "Cache-Control": "no-cache"
-    //    },
-    //    "processData": false,
-    //}
-
-    //$.ajax(settings).done(function (response) {
-    //    console.log(response);
-    //}).fail(function (jqXHR, textStatus, errorThrown) {
-    //    alert("Error");
-    //});
-
-
-
 
 }
 
@@ -341,9 +315,8 @@ function buscarAlbum() {
             if (strMenu == '') {
                 strMenu  = 'Nenhum album encontrado :(';
             }
-            else {
-                $('#tituloFotos').html('<h2>Clique em um dos albuns listados para visualizar as imagens</h2>');
-            }
+
+            //$('#tituloFotos').html('<h2>Clique em um dos albuns listados para visualizar as imagens</h2>');
 
             $('#listaAlbum').html(strMenu);
             
@@ -380,11 +353,13 @@ $(function () {
     var form;
     $('#fileUpload').change(function (event) {
         form = new FormData();
-        form.append('fileUpload', event.target.files[0]); // para apenas 1 arquivo
+        form.append('fileUpload', event.target.files[0], { type: "application/octet-stream" }); // para apenas 1 arquivo
         //var name = event.target.files[0].content.name; // para capturar o nome do arquivo com sua extenção
     });
 
     $('#btnEnviar').click(function () {
+
+        criaralbum($(inputNomeAlbum2).val());
 
         var settings = {
             "async": true,
