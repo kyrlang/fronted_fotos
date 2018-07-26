@@ -5,7 +5,7 @@ var VALIDURL = 'https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=';
 var SCOPE =   'https://www.googleapis.com/auth/photoslibrary.readonly https://www.googleapis.com/auth/photoslibrary.appendonly https://www.googleapis.com/auth/photoslibrary.sharing profile';
 var CLIENTID = '570343088582-fv94ns2tgse3sg08cs8tip7uuf5gjq47.apps.googleusercontent.com';
 var SECRET = 'sWgD2cbpRDFyMBg37ITz_W7w';
-var REDIRECT = 'http://localhost:6670'
+var REDIRECT = 'http://localhost:51197'
 //var REDIRECT = 'https://fotos-dd9d6.firebaseapp.com/'
 var LOGOUT = 'http://accounts.google.com/Logout';
 var TYPE = 'code';
@@ -207,6 +207,9 @@ function listarFotos() {
             },
             method: "GET",
             success: function (e) {
+
+                var contFotos = 1;
+
                 $.each(e.albums, (i, item) => {
 
                     var settings = {
@@ -227,15 +230,17 @@ function listarFotos() {
                     $.ajax(settings).done(function (response) {
 
                         if (response.mediaItems != undefined) {
+
                             $.each(response.mediaItems, (i, item) => {
+
                                 strFotos += '<div class="col-lg-3 col-md-12 col-sm-2 col-xs-12" nopad text-center>'
                                     + ' <label class="image-checkbox">'
-                                    + ' <img class="img-responsive img-thumbnail profile-pic-h" src =\'' + item.baseUrl + '\' />'
+                                    + ' <img class="img-responsive img-thumbnail profile-pic-h"  id=img' + contFotos + ' src =\'' + item.baseUrl + '\' />'
                                     + ' <input type="checkbox" name="image[]" value=\'' + item.id + '\' /> '
                                     + ' <i class="fa fa-check hidden"></i>'
                                     + ' </label>'
                                     + ' </div >';
-                                    
+                                contFotos++;
                             });
 
 
