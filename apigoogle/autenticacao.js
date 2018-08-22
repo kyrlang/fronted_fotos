@@ -5,7 +5,7 @@ var VALIDURL = 'https://www.googleapis.com/oauth2/v3/tokeninfo?access_token=';
 var SCOPE =   'https://www.googleapis.com/auth/photoslibrary.readonly https://www.googleapis.com/auth/photoslibrary.appendonly https://www.googleapis.com/auth/photoslibrary.sharing profile';
 var CLIENTID = '570343088582-fv94ns2tgse3sg08cs8tip7uuf5gjq47.apps.googleusercontent.com';
 var SECRET = 'sWgD2cbpRDFyMBg37ITz_W7w';
-var REDIRECT = 'http://localhost:51197'
+var REDIRECT = 'http://localhost:52984'
 //var REDIRECT = 'https://fotos-dd9d6.firebaseapp.com/'
 var LOGOUT = 'http://accounts.google.com/Logout';
 var TYPE = 'code';
@@ -114,8 +114,9 @@ function getUrlVars(url) {
     var vars = [], hash;
     //var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
     var hashes = url.slice(window.location.href.indexOf('?') + 1).split('&');
-    for (var i = 0; i < hashes.length; i++) {
-        hash = hashes[i].split('=');
+
+    if (hashes.length > 0) {
+        hash = hashes[0].split('=');
 
         if ($.inArray(hash[0], vars) > -1) {
             vars[hash[0]] += "," + hash[1];
@@ -124,7 +125,20 @@ function getUrlVars(url) {
             vars.push(hash[0]);
             vars[hash[0]] = hash[1];
         }
+
     }
+
+    //for (var i = 0; i < hashes.length; i++) {
+    //    hash = hashes[i].split('=');
+
+    //    if ($.inArray(hash[0], vars) > -1) {
+    //        vars[hash[0]] += "," + hash[1];
+    //    }
+    //    else {
+    //        vars.push(hash[0]);
+    //        vars[hash[0]] = hash[1];
+    //    }
+    //}
     return vars[hash[0]];
 }
 

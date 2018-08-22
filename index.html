@@ -10,147 +10,177 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar navbar-inverse">
-            <div class="container-fluid">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="#">ALBUM DE FOTOS</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li><a data-toggle="collapse" data-parent="#paginas" href="#index">Home</a></li>
-                    <li><a data-toggle="collapse" data-parent="#paginas" href="#sobre-nos">Sobre Nós</a></li>
-                    <li><a data-toggle="collapse" data-parent="#paginas" href="#listaTodasFotos" onclick="javascript:listarFotos()">Fotos</a></li>
-                </ul>
-                <form class="navbar-form navbar-left">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search Album" id="txtAlbum">
-                    </div>
-                    <a data-toggle="collapse" data-parent="#paginas" href="#listaBuscaAlbum">
-                        <button type="button" class="btn btn-default" onclick="buscarAlbum()">Search</button>
-                    </a>
-                </form>
-
-                <form class="navbar-form navbar-right">
-                    <a data-toggle="collapse" data-parent="#paginas" href="#index">
-                        <button type="button" class="btn btn-default" onclick="login()">Login</button>
-                    </a>
-                </form>
-
-            </div>
-        </nav>
-    </header>
-
-    <div class="container-fluid">
-
-        <div class="row">
-
-            <!-- menu -->
-            <div class="col-md-3">
-                <ul class="nav nav-pills nav-stacked" id="menuVertical">
-                    <!--<li><a data-toggle="collapse" data-parent="#paginas" href="#album1">Album 01</a></li>
-                    <li><a href="#">Album 02</a></li>
-                    <li><a href="#">Album 03</a></li>
-                    <li><a href="#">Album 04</a></li>-->
-                </ul>
-            </div>
 
 
-            <div class="col-md-9">
-                <div class="panel-group" id="paginas">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <header>
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
 
-                    <div class="panel panel-default">
-                        <div id="status" class="panel collapse in">
-                            <h1>Autenticação</h1>
-                            <p id="mensagemLogin">Clique em login para que você possa ter acesso ao restante do site</p>
+
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                                    aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            
+                            <a class="navbar-brand" href="#">ALBUM DE FOTOS</a>
+
                         </div>
-                    </div>
 
-                    <div class="panel panel-default">
-                        <div id="index" class="panel collapse">
-                            <h1>Album de fotos Aula Front End</h1>
-                            <p>Praticando FrontEnd</p>
-                        </div>
-                    </div>
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
+                            <ul class="nav navbar-nav">
+                                <li><a data-toggle="collapse" data-parent="#paginas" href="#index">Home</a></li>
+                                <li><a data-toggle="collapse" data-parent="#paginas" href="#sobre-nos">Sobre Nós</a></li>
+                                <li><a data-toggle="collapse" data-parent="#paginas" href="#listaTodasFotos" onclick="javascript:listarFotos()">Fotos</a></li>
+                            </ul>
 
-                    <div class="panel panel-default">
-                        <div id="sobre-nos" class="panel collapse">
-                            <h2>Sobre Nós</h2>
-                            <h3 class="panel-title">Somos Fabíola e Kyrla e estamos desenvolvendo um projeto para praticar algumas técnicas de CSS e Jquery. Nesse projeto iremos desenvolver uma aplicação de album de fotos.</h3>
-                        </div>
-                    </div>
-
-                    <div class="panel panel-default">
-                        <div id="listaTodasFotos" class="panel collapse">
-                            <form class="navbar-form navbar-left" action="#">
-
-                                <div>
-                                    <h2 id="tituloFotos"></h2>
-                                </div>
-
+                            <form class="navbar-form navbar-left">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Informe o nome do Album" id="inputNomeAlbum">
+                                    <input type="text" class="form-control" placeholder="Search Album" id="txtAlbum">
                                 </div>
-                                <button type="button" class="btn btn-default" onclick="javascript:criaralbum(inputNomeAlbum.value)">Criar</button>
+                                <a data-toggle="collapse" data-parent="#paginas" href="#listaBuscaAlbum">
+                                    <button type="button" class="btn btn-default" onclick="buscarAlbum()">Search</button>
+                                </a>
                             </form>
 
-                            <div class="row" id="listaFotos">
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="panel panel-default">
-                        <div id="album1" class="panel collapse">
-                            <div class="row" id="albumFotos">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="panel panel-default">
-                        <div id="listaBuscaAlbum" class="panel collapse">
-
-                            <h2 id="tituloFotos">Clique em um dos albuns listados para visualizar as imagens</h2>
-
-                            <ul class="nav nav-pills nav-stacked" id="listaAlbum"></ul>
-                            <form class="navbar-form navbar-left" action="#">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Informe o nome do Album" id="inputNomeAlbum2">
-                                </div>
-                                <!--<button type="button" class="btn btn-default" onclick="javascript:criaralbum()">Criar</button>-->
+                            <form class="navbar-form navbar-right">
+                                <a data-toggle="collapse" data-parent="#paginas" href="#index">
+                                    <button type="button" class="btn btn-default" onclick="login()">Login</button>
+                                </a>
                             </form>
-                            <form class="navbar-form navbar-left" action="#">
-                                <div class="form-group">
-                                    <input type="file" id="fileUpload" name="fileUpload" class="form-control" placeholder="Search" />
-                                </div>
-                                <button type="button" id="btnEnviar" class="btn btn-default" value="Enviar">Enviar</button>
-                            </form>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
+                        </div>
+
+
+
+
+
+
+                    </div>
+                </nav>
+            </header>
         </div>
     </div>
 
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <!-- menu -->
+                <div class="col-md-3">
+                    <ul class="nav nav-pills nav-stacked" id="menuVertical">
+                        <!--<li><a data-toggle="collapse" data-parent="#paginas" href="#album1">Album 01</a></li>
+                    <li><a href="#">Album 02</a></li>
+                    <li><a href="#">Album 03</a></li>
+                    <li><a href="#">Album 04</a></li>-->
+                    </ul>
                 </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
 
-    <script src="assets/js/jquery-1.11.2.min.js"></script>
-    <script src="assets/js/3.3.7bootstrap.min.js"></script>
-    <script src="assets/js/scripts.js"></script>
 
-    <!-- api spotify -->
-    <!--<script src="spotify/autenticacao.js"></script>-->
-    <!-- api google -->
-    <script src="apigoogle/autenticacao.js"></script>
+                <div class="col-md-9">
+                    <div class="panel-group" id="paginas">
+
+                        <div class="panel panel-default">
+                            <div id="status" class="panel collapse in">
+                                <h1>Autenticação</h1>
+                                <p id="mensagemLogin">Clique em login para que você possa ter acesso ao restante do site</p>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div id="index" class="panel collapse">
+                                <h1>Album de fotos Aula Front End</h1>
+                                <p>Praticando FrontEnd</p>
+                            </div>
+                        </div>
+
+
+                        <div class="panel panel-default">
+                            <div id="sobre-nos" class="panel collapse">
+                                <h2>Sobre Nós</h2>
+                                <h3 class="panel-title">Somos Fabíola e Kyrla e estamos desenvolvendo um projeto para praticar algumas técnicas de CSS e Jquery. Nesse projeto iremos desenvolver uma aplicação de album de fotos.</h3>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div id="listaTodasFotos" class="panel collapse">
+                                <form class="navbar-form navbar-left" action="#">
+
+                                    <div>
+                                        <h2 id="tituloFotos"></h2>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Informe o nome do Album" id="inputNomeAlbum">
+                                    </div>
+                                    <button type="button" class="btn btn-default" onclick="javascript:criaralbum(inputNomeAlbum.value)">Criar</button>
+                                </form>
+
+                                <div class="row" id="listaFotos">
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div id="album1" class="panel collapse">
+                                <div class="row" id="albumFotos">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div id="listaBuscaAlbum" class="panel collapse">
+
+                                <h2 id="tituloFotos">Clique em um dos albuns listados para visualizar as imagens</h2>
+
+                                <ul class="nav nav-pills nav-stacked" id="listaAlbum"></ul>
+                                <form class="navbar-form navbar-left" action="#">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Informe o nome do Album" id="inputNomeAlbum2">
+                                    </div>
+                                    <!--<button type="button" class="btn btn-default" onclick="javascript:criaralbum()">Criar</button>-->
+                                </form>
+                                <form class="navbar-form navbar-left" action="#">
+                                    <div class="form-group">
+                                        <input type="file" id="fileUpload" name="fileUpload" class="form-control" placeholder="Search" />
+                                    </div>
+                                    <button type="button" id="btnEnviar" class="btn btn-default" value="Enviar">Enviar</button>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <script src="assets/js/jquery-1.11.2.min.js"></script>
+        <script src="assets/js/3.3.7bootstrap.min.js"></script>
+        <script src="assets/js/scripts.js"></script>
+
+        <!-- api spotify -->
+        <!--<script src="spotify/autenticacao.js"></script>-->
+        <!-- api google -->
+        <script src="apigoogle/autenticacao.js"></script>
 
 
 
